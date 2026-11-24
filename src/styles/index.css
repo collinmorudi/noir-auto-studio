@@ -1,0 +1,93 @@
+@import "tailwindcss";
+
+@theme {
+  --color-obsidian: #151719;
+  --color-champagne: #C5A77A;
+  --color-ivory: #F5F2EB;
+  --color-slate: #34383C;
+
+  --font-heading: "Manrope Variable", "Segoe UI", sans-serif;
+  --font-sans: "Inter Variable", "Segoe UI", system-ui, sans-serif;
+  --text-display: clamp(2.75rem, 1.65rem + 4.9vw, 6.25rem);
+  --text-display--line-height: 1.02;
+
+  --spacing-gutter: clamp(1.25rem, 4vw, 4rem);
+  --spacing-section: clamp(4rem, 9vw, 8rem);
+  --spacing-hero: clamp(5rem, 11vw, 10rem);
+  --container-studio: 84rem;
+  --radius-control: 0.375rem;
+
+  --breakpoint-sm: 40rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 64rem;
+  --breakpoint-xl: 80rem;
+}
+
+@layer base {
+  :root {
+    --focus-width: 2px;
+    --focus-offset: 4px;
+    --focus-light: var(--color-ivory);
+    --focus-dark: var(--color-slate);
+  }
+
+  body {
+    @apply bg-ivory font-sans text-obsidian antialiased;
+  }
+
+  :focus-visible {
+    outline: var(--focus-width) solid var(--focus-dark);
+    outline-offset: var(--focus-offset);
+  }
+
+  .bg-obsidian :focus-visible,
+  .bg-obsidian:focus-visible {
+    outline-color: var(--focus-light);
+  }
+}
+
+@layer components {
+  .studio-button {
+    @apply inline-flex min-h-11 cursor-pointer items-center justify-center rounded-control px-4 py-2 text-center text-sm font-bold;
+    @apply motion-safe:transition-colors;
+  }
+
+  .studio-button--primary {
+    @apply bg-champagne text-obsidian hover:bg-ivory;
+  }
+
+  .studio-button--primary[aria-current="page"] {
+    box-shadow: inset 0 0 0 2px currentColor;
+  }
+
+  .studio-button--dark {
+    @apply bg-obsidian text-ivory hover:bg-slate;
+  }
+
+  .nav-link {
+    @apply flex min-h-11 items-center text-sm font-semibold text-ivory underline-offset-8 hover:underline;
+    @apply motion-safe:transition-colors;
+  }
+
+  .nav-link[aria-current="page"] {
+    @apply text-champagne underline decoration-2;
+  }
+
+  .home-hero {
+    position: relative;
+    isolation: isolate;
+    overflow: clip;
+    background-image: radial-gradient(ellipse at 88% 48%, #373530, transparent 54%);
+  }
+
+  .home-hero::before {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    background:
+      linear-gradient(90deg, var(--color-obsidian), transparent 74%),
+      repeating-linear-gradient(126deg, transparent 0 24px, rgb(197 167 122 / 8%) 24px 25px);
+    mask-image: radial-gradient(ellipse at 90% 55%, black, transparent 74%);
+    content: "";
+  }
+}
